@@ -1,0 +1,38 @@
+<meta charset="UTF-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,500;1,600&display=swap" rel="stylesheet">
+<!-- General -->
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name='description' content= '{{ app_description }}'>
+<meta name="robots" content="index,follow">
+<meta name="googlebot" content="index,follow">
+<base href="{{ app.request.getBaseUrl() }}">
+<meta name="authors" content="Ossama Dahbi, Amine Cherigui, Teddy Gauthier, Maxime Pietrucci-Blacher">
+<!-- Favicons -->
+<link rel="favicon" href="{{ asset('images/favicons/favicon.ico') }}">
+<link rel="icon" type="image/png" href="{{ asset('images/favicons/android-chrome-192x192.png') }}" sizes="192x192">
+<link rel="icon" type="image/png" href="{{ asset('images/favicons/android-chrome-512x512.png') }}" sizes="512x512">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/favicons/apple-touch-icon.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicons/favicon-16x16.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicons/favicon-32x32.png') }}">
+<link rel="manifest" href="{{ asset('images/favicons/site.webmanifest') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+<!-- App meta tags -->
+<meta name="application-name" content="{{ app_name }}">
+<meta name="rating" content="General">
+<meta name="subject" content="{{ app_description }}">
+
+<!--Apple tags -->
+<meta name="apple-mobile-web-app-title" content="{{ app_name }}">
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}

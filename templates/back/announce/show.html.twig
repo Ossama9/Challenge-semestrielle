@@ -1,0 +1,39 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}{{ app_name }} - Annonce{% endblock %}
+{% block header %}Announce: {{announce.title}}{% endblock %}
+
+{% block main %}
+    <table class="table mb-5">
+        <tbody>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Id</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.id }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Prix</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.price }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Title</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.title }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Description</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.description }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nombre de lits</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.numberOfBeds }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Options</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.options }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn-secondary" href="{{ path('admin_app_announce_index') }}">Retour</a>
+    <a class="btn-danger" href="{{ path('admin_app_announce_delete', {'id': announce.id, 'token': csrf_token('delete' ~ announce.id)}) }}">Supprimer</a>
+
+{% endblock %}

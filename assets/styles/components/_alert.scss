@@ -1,0 +1,27 @@
+.alert {
+  padding: 15px 15px 15px 25px;
+  font-weight: 500;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.alert-info {
+  color: rgba(66, 111, 141, 0.87);
+  background: #DDECF5;
+}
+
+.alert.alert-success {
+  color: #4A7544;
+  background: #E2F0DA;
+}
+
+.alert-error {
+  color: #9D4A45;
+  background: #EFDFDE;
+}
+
+.alert-warning {
+  color: #856E47;
+  background: #FBF8E5;
+}

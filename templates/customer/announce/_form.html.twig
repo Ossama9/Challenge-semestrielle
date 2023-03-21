@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn-primary">{{ button_label|default('Save') }}</button>
+    <a class="btn-secondary" href="{{ path('customer_app_announce_index') }}">Liste des annonces</a>
+    {% if announce.id is not null %}
+    <a href="{{ path('customer_app_announce_show', {'id': announce.id}) }}" class="btn-secondary">Retour</a>
+    {% endif %}
+{{ form_end(form) }}

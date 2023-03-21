@@ -1,0 +1,78 @@
+{% extends 'base_front.html.twig' %}
+{% block title %}Hotel{% endblock %}
+{% block main %}
+<div class="py-10 bg-gray-150">
+<div id="hotelContainer" class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
+    <div>
+        <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl ">
+        <table class="table mb-5">
+            <thead class="border-b">
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Total PRICE</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Reservation NAME</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Start DATE</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">END DATE</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b">
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.price }} €</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.name }}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.start|date('Y-m-d') }}</td>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.end|date('Y-m-d') }}</td>
+                </tr>
+            </tbody>
+        </table>
+        </article>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    {% for message in app.flashes('success') %}
+                        <div
+                                style="color: green;
+                                    border: 2px green solid;
+                                    text-align: center;
+                                    padding: 5px;margin-bottom: 10px;">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <article class="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl ">
+                    <div class="mt-1 p-2">
+                    <form id='checkout-form' method='post' action="{{ path('front_app_payment_charge',  {id:reservation.id}) }}">
+                        <input type='hidden' name='stripeToken' id='stripe-token-id'>
+                        <label for="card-element" class="mb-5" >Checkout Forms</label>
+                        <br>
+                        <div id="card-element" class="form-control" style="margin-bottom:20px" ></div>
+                        <button id='pay-btn' class="text-sm w-full justify-center flex items-center space-x-1.5 rounded-lg bg-blue-500 px-4 py-4 text-white duration-100 hover:bg-blue-600" onclick="createToken()">PAYER {{ price }}  €</button>
+                    </form>
+                </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://js.stripe.com/v3/" ></script>
+<script>
+    var stripe = Stripe("{{stripe_key}}");
+    var elements = stripe.elements();
+    var cardElement = elements.create('card');
+    cardElement.mount('#card-element');
+    function createToken() {
+        document.getElementById("pay-btn").disabled = true;
+        stripe.createToken(cardElement).then(function(result) {
+            if(typeof result.error != 'undefined') {
+                document.getElementById("pay-btn").disabled = false;
+                alert(result.error.message);
+            }
+            // creating token success
+            if(typeof result.token != 'undefined') {
+                document.getElementById("stripe-token-id").value = result.token.id;
+                document.getElementById('checkout-form').submit();
+            }
+        });
+    }
+</script>
+    {% endblock %}

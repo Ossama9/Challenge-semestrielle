@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<title>Avis index</title>
+
+{% block body %}
+    <h1>Avis index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Message</th>
+                <th>Note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commen in comment %}
+            <tr>
+                <td>{{ commen.id }}</td>
+                <td>{{ commen.date ? commen.date|date('Y-m-d') : '' }}</td>
+                <td>{{ commen.message }}</td>
+                <td>{{ commen.note }}</td>
+                <td>
+                    <a href="{{ path('front_app_comment_show', {'id': commen.id}) }}">show</a>
+                    <a href="{{ path('front_app_comment_edit', {'id': commen.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('front_app_comment_new') }}">Create new</a>
+{% endblock %}

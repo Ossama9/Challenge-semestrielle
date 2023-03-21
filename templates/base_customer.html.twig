@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'partials/_head.html.twig' %}
+</head>
+{% block body %}
+    <body class="overflow-hidden">
+    <div class="h-screen w-full flex overflow-hidden">
+        <nav class="flex flex-col bg-white w-64">
+            <div class="logo my-5">
+                <a href="{{ path('customer_default_index') }}" class="flex items-center justify-center h-16 w-full">
+                    <img src="{{ asset('images/hotelia_logo.png') }}" alt="logo" class="h-50 w-50 block">
+                    <span class="text-gray-700 text-xl font-semibold block">Hotelia</span>
+                </a>
+            </div>
+            <div class="menu">
+                <ul class="flex flex-col py-4 space-y-1">
+                    <li class="px-6">
+                        <a href="{{ path('customer_default_index') }}" class="{{ page == 'dashboard' ? 'btn-dashboard-selected' : 'btn-dashboard'}}">
+                            <span class="material-icons ">dashboard</span>
+                            <span class="text-sm font-medium">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="px-6">
+                        <a href="{{ path('customer_app_hotel_index') }}" class="{{ page == 'hotel' ? 'btn-dashboard-selected' : 'btn-dashboard'}}">
+                            <span class="material-icons">home</span>
+                            <span class="text-sm font-medium">Hotels</span>
+                        </a>
+                    </li>
+                    <li class="px-6">
+                        <a href="{{ path('customer_app_announce_index') }}" class="{{ page == 'announce' ? 'btn-dashboard-selected' : 'btn-dashboard'}}">
+                            <span class="material-icons">sell</span>
+                            <span class="text-sm font-medium">Annonce</span>
+                        </a>
+                    </li>
+                    <li class="px-6">
+                        <a href="{{ path('customer_app_comment_index') }}" class="{{ page == 'comment' ? 'btn-dashboard-selected' : 'btn-dashboard'}}">
+                            <span class="material-icons">comment</span>
+                            <span class="text-sm font-medium">Commentaire</span>
+                        </a>
+                    </li>
+                    <li class="px-6">
+                        <a href="{{ path('app_profile')}}" class="{{ page == 'profile' ? 'btn-dashboard-selected' : 'btn-dashboard'}}">
+                            <span class="material-icons">person</span>
+                            <span class="text-sm font-medium">Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottom absolute bottom-0">
+                <ul class="flex flex-col py-4 space-y-1">
+                    <li class="px-6">
+                        <a href="{{ path('front_default_index') }}" class="flex items-center space-x-3 h-10 rounded-lg text-gray-500">
+                            <span class="material-icons">undo</span>
+                            <span class="text-sm font-medium">Retour</span>
+                        </a>
+                    </li>
+                    <li class="px-6">
+                        <a href="" class="flex items-center space-x-3 h-10 rounded-lg text-gray-500">
+                            <span class="material-icons">dark_mode</span>
+                            <span class="text-sm font-medium">Dark mode</span>
+                        </a>
+                    </li>
+                    <li class="px-6">
+                        <a href="{{ path('app_logout') }}" class="flex items-center space-x-3 h-10 rounded-lg text-red-600">
+                            <span class="material-icons">logout</span>
+                            <span class="text-sm font-medium">Déconnexion</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main class="flex-1 flex flex-col bg-gray-100 transition duration-500 ease-in-out overflow-y-auto">
+            <div class="mx-10 my-2">
+                {% include 'partials/_message_flash.html.twig' %}
+                {% block main %}
+                {% endblock %}
+            </div>
+        </main>
+    </div>
+    </body>
+{% endblock %}
+</html>

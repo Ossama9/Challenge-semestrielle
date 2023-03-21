@@ -1,0 +1,41 @@
+{% extends 'base_customer.html.twig' %}
+
+{% block title %}Announce index{% endblock %}
+{% block header %}Announce index{% endblock %}
+
+{% block main %}
+    <table class="table mb-5">
+        <thead class="border-b">
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Prix</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Title</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Bed</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Options</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for announce in announces %}
+            <tr class="border-b">
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.price }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.title }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.numberOfBeds }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.options }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <a class="btn-secondary" href="{{ path('customer_app_announce_show', {'id': announce.id}) }}">Voir</a>
+                    <a class="btn-primary" href="{{ path('customer_app_announce_edit', {'id': announce.id}) }}">Modifier</a>
+                    <a class="btn-danger" href="{{ path('customer_app_announce_delete', {'id': announce.id, 'token': csrf_token('delete' ~ announce.id)}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" colspan="5">Aucune announce n'a été trouver</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn-primary" href="{{ path('customer_app_announce_new') }}">Ajouter une annonce</a>
+    <div class="text-center">
+        {{ knp_pagination_render(announces) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+controller_security:
+        resource: ../src/Controller/SecurityController.php
+        type: attribute
+
+controllers_front:
+        resource: ../src/Controller/Front
+        type: attribute
+        name_prefix: front_
+
+controllers_back:
+        resource: ../src/Controller/Back
+        type: attribute
+        name_prefix: admin_
+        prefix: /admin/
+
+
+controllers_customer:
+        resource: ../src/Controller/Customer
+        type: attribute
+        name_prefix: customer_
+        prefix: /customer/
+
+
+

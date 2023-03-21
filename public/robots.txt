@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /customer/
+Disallow: /public/
+
+Sitemap: https://hotelia.mpb-dev.fr/sitemap.xml

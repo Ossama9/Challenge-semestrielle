@@ -1,0 +1,48 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Hotel{% endblock %}
+{% block header %}Hotel{% endblock %}
+
+{% block main %}
+    <h1 class="h1">Hotel</h1>
+
+    <table class="table mb-5">
+        <tbody>
+            <tr>
+               <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><img src="{{ hotel.image }}" style="max-height: 200px"></td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.name }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Adresse</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.adresse }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Ville</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.ville }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Code postal</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.codePostal }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Telephone</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.telephone }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Note</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.note }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Description</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn-secondary" href="{{ path('admin_app_hotel_index') }}">Retour</a>
+    <a class="btn-danger" href="{{ path('admin_app_hotel_delete', {'id': hotel.id, 'token': csrf_token('delete' ~ hotel.id)}) }}">Supprimer</a>
+
+{% endblock %}

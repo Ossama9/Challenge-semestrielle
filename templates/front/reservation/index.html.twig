@@ -1,0 +1,32 @@
+{% extends 'base_front.html.twig' %}
+{% block title %}{{ app_name }} - Mes Réservations{% endblock %}
+{% block main %}
+    <div class="py-10 bg-gray-150">
+        <div id="hotelContainer" class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
+            {% for reservation in reservations %}
+                <article class="flex justify-between rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform  duration-300 ">
+                    <div>
+                        <h2 class="font-bold text-xl p-2">Booking name : {{ reservation.name }}</h2>
+                        <div class="mt-1 p-2">
+                            <h3 class="text-slate-700"><strong>Booking date : {{ reservation.createdAt ? reservation.createdAt|date('Y-m-d H:i:s') : '' }}</strong></h3>
+                            <h3 class="text-slate-700"><strong>Price : {{ reservation.price }}€</strong></h3>
+                            <h3 class="text-slate-700"><strong>{{ reservation.start ? reservation.start|date('Y-m-d') : '' }} TO {{ reservation.end ? reservation.end|date('Y-m-d') : '' }}</strong></h3>
+                        </div>
+                        <br>
+                        <br>
+                        <div>
+                            <a class="btn-secondary" href="{{ path('front_app_reservation_show', {'id': reservation.id}) }}">Voir</a>
+                            <a class="btn-primary" href="{{ path('front_reservation.pdf', {'id': reservation.id}) }}">PDF</a>
+                        </div>
+                    </div>
+                    <div>
+                        <img class="max-h-[150px] rounded-xl" src="{{ reservation.announce.hotel.image}}" alt="{{ reservation.announce.hotel.name}}">
+                    </div>
+                    
+                </article>
+            {% else %}
+               <span>No reservation found</span>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

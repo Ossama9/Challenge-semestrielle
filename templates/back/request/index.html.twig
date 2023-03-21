@@ -1,0 +1,41 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Liste des demande en cours{% endblock %}
+
+
+{% block main %}
+    <h1 class="h1">Liste des demande en cours</h1>
+    <table class="table mb-5">
+        <thead class="border-b">
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Prenom</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Email</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Date</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+            <tr class="border-b">
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.user.firstname }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.user.lastname }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.user.email }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.createdAt | date_modify('+1 hour') | date('Y-m-d-H:i:s') }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <a class="btn-secondary" href="{{ path('admin_app_request_show', {'id': request.id}) }}">Voir</a>
+                    <a class="btn-primary" href="{{ path('admin_app_request_accept', {'id': request.id, 'token': csrf_token('accept' ~ request.id)}) }}">Accepter</a>
+                    <a class="btn-danger" href="{{ path('admin_app_request_decline', {'id': request.id, 'token': csrf_token('decline' ~ request.id)}) }}">Refuser</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" colspan="6">Aucune demande n'a été trouver</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        {{ knp_pagination_render(requests) }}
+    </div>
+{% endblock %}

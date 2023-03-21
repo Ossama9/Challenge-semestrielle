@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="" dir="ltr">
+<head>
+    <title>{% block title %}My Reservations{% endblock %}</title>
+    {% include 'partials/_head.html.twig' %}
+</head>
+{% block body %}
+    {% block header %}
+        <nav>
+            <div>
+                <select></select>
+            </div>
+        </nav>
+    {% endblock %}
+    {% block main %}
+        <div style="text-align: center">
+            <h1 >Reservation</h1>
+            <h3>Hello, We are pleased to confirm your reservation with HOTELIA</h3>
+        </div>
+        <div style="text-align: center">
+            <table class="table mb-5" >
+                <thead class="border-b" style="text-align: center">
+                <tr>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Start Day</th>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.start ? reservation.start|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">End date</th>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.end ? reservation.end|date('Y-m-d') : '' }}</td>
+                </tr><
+                <tr>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Booking date</th>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.createdAt ? reservation.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Booking Price</th>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.price }} €</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Booking Name</th>
+                    <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ reservation.name }}</td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center">
+            <h4>If you have any questions or special requests regarding your stay, please do not hesitate to contact us.</h4>
+        </div>
+    {% endblock %}
+    {% block footer %}{% endblock %}
+{% endblock %}
+</html>
+

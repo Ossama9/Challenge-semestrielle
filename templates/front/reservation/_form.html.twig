@@ -1,0 +1,8 @@
+{{ form_start(form, {'attr': {'method': 'POST', 'enctype' : 'multipart/form-data'}})}}
+    <div class="flex flex-col gap-3">
+        {{ form_row(form.start, {'label_attr': {'class': 'mr-3 text-lg font-bold'}}) }}
+        {{ form_row(form.end, { 'label_attr': {'class': 'mr-[1.35rem] text-lg font-bold'}}) }}
+        {{ form_row(form.name, { 'label_attr': {'class': 'mr-4 text-lg font-bold'}})}}
+    </div>
+    <button class="btn-primary">{{ button_label|default('RESERVER') }}</button>
+{{ form_end(form) }}

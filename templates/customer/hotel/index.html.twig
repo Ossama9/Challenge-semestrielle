@@ -1,0 +1,49 @@
+{% extends 'base_customer.html.twig' %}
+
+{% block title %}Liste des Hotels{% endblock %}
+{% block header %}List des Hotels{% endblock %}
+
+{% block main %}
+    <table class="table mb-5">
+        <thead class="border-b">
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Id</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Hotel</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Adresse</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Ville</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Code postal</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Telephone</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Note</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Image</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for hotel in hotels %}
+            <tr>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.id }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.name }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.adresse }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.ville }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.codePostal }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.telephone }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.note }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><img class="max-h-[50px]" src="{{ hotel.image }}"></td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <a class="btn-secondary" href="{{ path('customer_app_hotel_show', {'id': hotel.id}) }}">Voir</a>
+                    <a class="btn-primary" href="{{ path('customer_app_hotel_edit', {'id': hotel.id}) }}">Modifier</a>
+                    <a class="btn-danger" href="{{ path('customer_app_hotel_delete', {'id': hotel.id, 'token': csrf_token('delete' ~ hotel.id)}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" colspan="10">Aucun hotel pour l'instant</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn-primary" href="{{ path('customer_app_hotel_new') }}">Ajouter</a>
+    <div class="text-center">
+        {{ knp_pagination_render(hotels) }}
+    </div>
+{% endblock %}

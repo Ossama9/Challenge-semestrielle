@@ -1,0 +1,52 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}{{ app_name }} - Mon Profil{% endblock %}
+
+{% block main %}
+
+<div class="mt-2 flex justify-between p-3 bg-white rounded-lg">
+    <div>
+        <h1 class="h1">Mon Profil</h1>
+        <div class="mt-2">
+            Email : {{ app.user.email }}
+        </div>
+        <div class="mt-2">
+            Lastname : {{ app.user.lastname }}
+        </div>
+        <div class="mt-2">
+            Firstname : {{ app.user.firstname }}
+        </div>
+        <div class="mt-2">
+            Last login : {{ app.user.lastLogin | date_modify('+1 hour')| date('Y-m-d H:i:s') }}
+        </div>
+        <div class="mt-2">
+            Date de creation compte : {{ app.user.createdAt | date_modify('+1 hour') | date('Y-m-d H:i:s') }}
+        </div>
+
+        <div class="mt-2">
+            <a class="btn-primary" href="{{ path('app_profile_edit') }}">Modifier le profil</a>
+
+            {% if app.user.isCustomer is null %}
+            <a class="btn-secondary" href="{{ path('front_app_request_create') }}">Devenir un client</a>
+            {% endif %}
+
+            {% if app.user.isCustomer is not null %}
+            <a class="btn-secondary" href="{{ path('front_app_request_show') }}">Suivi demande</a>
+            {% endif %}
+
+            {% if app.user.reservations | length > 0 %}
+                <a class="btn-secondary" href="{{ path('front_app_reservation_index') }}">Mes reservations</a>
+            {% endif %}
+{#            {% if app.user.reservations is not null %}#}
+{#            <a class="btn-secondary" href="{{ path('front_app_request_show') }}">Suivi demande</a>#}
+{#            {% endif %}#}
+
+            <a class="btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+    </div>
+    <div>
+        <img class="avatar" src="../../../uploads/avatar/{{app.user.avatar}}">
+    </div>
+</div>
+
+{% endblock %}

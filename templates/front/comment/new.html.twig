@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>New Avis</title>
+<style>
+    .input-hidden{display: none}
+</style>
+{% block body %}
+    <h1>Create new Avis</h1>
+
+    {{ include('front/comment/_form.html.twig') }}
+
+    <a href="{{ path('front_app_comment_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Demande de {{ request.user.lastname }} {{ request.user.firstname }}{% endblock %}
+
+
+{% block main %}
+
+    <div class="example-wrapper">
+        <h1 class="h1">Demande de {{ request.user.lastname }} {{ request.user.firstname }} Pour {{ request.hotel.name }} ✅</h1>
+        <table class="table mb-5">
+            <tbody>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom Complet de
+                    l'utilisateur
+                </th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.user.lastname }} {{ request.user.firstname }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Email</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.user.email }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Date de creation de son
+                    compte
+                </th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.createdAt | date_modify('+1 hour') | date('Y-m-d-H:i:s') }}</td>
+            </tr>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.name }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Adresse</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.adresse }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Pays</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.country }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Ville</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.ville }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Code postal</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.codePostal }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Telephone</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.telephone }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Note</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.note }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Description</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel.description }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Image</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <img src="{{ request.hotel.image }}" height="40px">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a class="btn-primary" href="{{ path('admin_app_request_accept', {'id': request.id, 'token': csrf_token('accept' ~ request.id)}) }}">Accepter</a>
+        <a class="btn-danger" href="{{ path('admin_app_request_decline', {'id': request.id, 'token': csrf_token('decline' ~ request.id)}) }}">Refuser</a>
+
+
+    </div>
+{% endblock %}

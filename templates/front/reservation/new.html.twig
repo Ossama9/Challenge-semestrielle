@@ -1,0 +1,30 @@
+{% extends 'base_front.html.twig' %}
+{% block title %}{{ app_name }} - Reservation{% endblock %}
+
+{% block main %}
+    <table class="table mb-5">
+        <thead class="border-b">
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Hotel</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Prix</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Title</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Description</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Bed</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Options</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="border-b">
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.hotel }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.price }} / Day</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.title }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4">{{ announce.description }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.numberOfBeds }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.options }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {{ include('front/reservation/_form.html.twig') }}
+    <br><br>
+    <a class="btn-primary" href="{{ path('front_app_reservation_index') }}">My Reservations</a>
+{% endblock %}

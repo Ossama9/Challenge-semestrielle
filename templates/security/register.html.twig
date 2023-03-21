@@ -1,0 +1,57 @@
+{% extends 'base_blank.html.twig' %}
+
+{% block title %}{{ app_name }} - Inscription{% endblock %}
+
+{% block main %}
+    <div class="flex flex-row h-screen overflow-hidden  max-sm:overflow-x-auto">
+        <section class="h-screen w-1/2 max-md:hidden max-sm:hidden max-lg:hidden lg:block">
+            <div id="sliderhorizon1" class="flex flex-col items-center justify-center h-screen">
+                <h2 class="font-semibold text-4xl">Un service de qualité </h2>
+                <lottie-player class="w-2/4 h-1/2 justify-center" src="https://assets5.lottiefiles.com/packages/lf20_pbd9rtif/data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+            </div>
+            <div id="sliderhorizon2" class="flex flex-col items-center h-screen">
+                <h2 class="font-semibold text-4xl">Un service de qualité </h2>
+                <lottie-player class="w-2/4 justify-center" src="https://assets5.lottiefiles.com/packages/lf20_pbd9rtif/data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+            </div>
+            <div id="sliderhorizon3" class="flex flex-col items-center h-screen">
+                <h2 class="font-semibold text-4xl">Un service de qualité </h2>
+                <lottie-player class="w-2/4 justify-center" src="https://assets5.lottiefiles.com/packages/lf20_pbd9rtif/data.json"  background="transparent"  speed="1"  loop autoplay></lottie-player>
+            </div>
+        </section>
+        <section class="flex flex-col items-center justify-center lg:w-1/2 bg-gray-50 max-md:w-screen max-sm:w-screen w-full">
+                <form class="w-full h-full flex justify-center" method="post">
+                    <div class="flex flex-col justify-center h-full w-8/12 space-y-6">
+                        <div>
+                            <h1 class="text-4xl font-semibold mb-3">Sign Up</h1>
+                        </div>
+                        {% include 'partials/_message_flash.html.twig' %}
+                        <br>
+                        <div class="flex flex-row gap-x-16 max-sm:flex-wrap">
+                            <div class="flex flex-col">
+                                <label class="text-xl" for="inputLastname">Nom*</label>
+                                <input type="text" value="{{ lastname }}" name="inputLastname" id="inputLastname" class="border border-gray-200 placeholder:italic placeholder:text-slate-400 focus:outline-none shadow p-4 rounded-xl" placeholder="Enter your lastname" autocomplete="family-name" required>
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-xl" for="inputFirstname">Prénom*</label>
+                                <input type="text" value="{{ firstname }}" name="firstname" id="inputFirstname" class=" placeholder:italic placeholder:text-slate-400 border border-gray-200 focus:outline-none shadow p-4 rounded-xl" placeholder="Enter your firstname" autocomplete="given-name" required>
+                            </div>
+                        </div>
+                        <label class="text-xl" for="inputEmail">Email*</label>
+                        <input type="email" value="{{ email }}" name="email" id="inputEmail" class="border border-gray-200 placeholder:italic placeholder:text-slate-400 focus:outline-none shadow p-4 rounded-xl" placeholder="Enter your email" autocomplete="email" required>
+                        <label class="text-xl" for="inputPassword">Password*</label>
+                        <div class="flex item-center border border-gray-200 shadow p-4 rounded-xl bg-white">
+                            <input type="password" name="password" id="inputPassword" class="placeholder:italic placeholder:text-slate-400 focus:outline-none w-full" placeholder="Enter your Password" autocomplete="current-password" required>
+                            <span class="material-icons eye cursor-pointer">visibility</span>
+                        </div>
+                        <label class="text-xl" for="inputPasswordConfirm">Confirm password*</label>
+                        <input type="password" name="passwordConfirm" id="inputPasswordConfirm" class="placeholder:italic placeholder:text-slate-400 border border-gray-200 focus:outline-none shadow p-4 rounded-xl" placeholder="Confirm your password" autocomplete="current-password" required>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <button class="bg-indigo-600 rounded-xl py-3 text-xl font-medium text-white shadow" type="submit">Get started</button>
+                        <div class="flex justify-center text-lg font-medium">
+                            <p>Already have an account ? <a class="text-indigo-600 underline" href="{{ path('app_login') }}">Login in</a></p>
+                        </div>
+                    </div>
+                </form>
+        </section>
+    </div>
+{% endblock %}

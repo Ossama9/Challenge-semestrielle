@@ -1,0 +1,21 @@
+{% extends 'base_front.html.twig' %}
+{% block title %}Error{% endblock %}
+
+{% block main %}
+    <div class="py-10 bg-gray-150">
+        <div id="hotelContainer" class="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
+            <div>
+                <div class="relative flex items-end overflow-hidden rounded-xl">
+                    <img src="{{ asset('images/hotelia_logo.png') }}" class=" h-full" alt="LOGO" loading="lazy" >
+                </div>
+                <div>
+                    <h1 class="text-slate-700">Error</h1>
+                    <p>
+                        Server Error.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Suivi de demande !{% endblock %}
+
+{% block main %}
+
+    <h1>Mes demandes en cours</h1>
+
+    <table class="table mb-5">
+        <thead class="border-b">
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Date de creation</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom Hotel</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+            <tr class="border-b">
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.createdAt | date_modify('+1 hour') | date('Y-m-d-H:i:s') }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.hotel }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ request.isApproved is null ? 'En attente' : request.isApproved == 0 ? 'Refusé' : 'Validé' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% for request in requests %}
+        {% if request.isApproved %}
+            <a class="btn-primary" href="{{ path('customer_default_index') }}">Lien pour dashboard Customer</a>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

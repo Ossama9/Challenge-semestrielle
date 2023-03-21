@@ -1,0 +1,23 @@
+{% extends 'base_customer.html.twig' %}
+
+{% block title %}Edit hotel{% endblock %}
+{% block header %}Edit Hotel{% endblock %}
+
+{% block main %}
+    <section class="max-w-[2/3]">
+        <h1 class="text-4xl font-bold ">Edit hotel</h1>
+        <div class="flex justify-start">
+            <div>
+                <img class="rounded-xl max-h-[400px]" src="{{ hotel.image }}">
+            </div>
+        </div>
+        <br>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn-primary">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('customer_app_hotel_show', {'id': hotel.id}) }}" class="btn-secondary">Retour</a>
+        {{ form_end(form) }}
+    </section>
+
+
+{% endblock %}

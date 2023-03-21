@@ -1,0 +1,38 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Commentaire{% endblock %}
+
+{% block main %}
+    <h1 class="h1">Liste des commentaire</h1>
+    <table class="table mb-5">
+        <thead class="border-b">
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Id</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Date</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Message</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Note</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr class="border-b">
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ comment.id }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ comment.createdAt ? comment.createdAt|date('Y-m-d') : '' }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4">{{ comment.message }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ comment.note }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <a class="btn-danger" href="{{ path('admin_app_comment_delete', {'id': comment.id, 'token': csrf_token('delete' ~ comment.id)}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        {{ knp_pagination_render(comments) }}
+    </div>
+{% endblock %}

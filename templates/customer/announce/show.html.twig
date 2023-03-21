@@ -1,0 +1,46 @@
+{% extends 'base_customer.html.twig' %}
+
+{% block title %}Annonce{% endblock %}
+{% block header %}Annonce: {{announce.title}}{% endblock %}
+
+{% block main %}
+    <table class="table mb-5">
+        <tbody>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Image d'hotel</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap h-[400px]"><img class="rounded-xl max-h-[400px]" src="{{ announce.hotel.image }}"></td>
+        </tr>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom Nom</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.hotel.name }}</td>
+        </tr>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Id</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.id }}</td>
+        </tr>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Prix</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.price }}</td>
+        </tr>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Title</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.title }}</td>
+        </tr>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Description</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.description }}</td>
+        </tr>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nombre de lits</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.numberOfBeds }}</td>
+        </tr>
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Options</th>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ announce.options }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a class="btn-secondary" href="{{ path('customer_app_announce_index') }}">Liste des annonce</a>
+    <a class="btn-primary" href="{{ path('customer_app_announce_edit', {'id': announce.id}) }}">Modifier</a>
+{% endblock %}

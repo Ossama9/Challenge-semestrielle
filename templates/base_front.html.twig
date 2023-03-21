@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        {% include 'partials/_head.html.twig' %}
+    </head>
+    {% block body %}
+        <div class="lg:container-xl lg:mx-auto lg:px-36">
+        {% block header %}
+            <nav id="headPage" class="flex flex-row items-center h-20 w-full ">
+                <div class="flex flex-row items-center ml-5 w-4/6 ">
+                    <img class="w-1/12 h-12" src="{{ asset('images/logo.svg') }}" loading="lazy" srcset="{{ asset('images/logo.svg') }}" alt="Hotelia Logo" >
+                    <span class="w-0 mr-16 border-zinc-200 h-10 border-l-2 flex items-center"></span>
+                    <ul class="w-11/12 flex flex-row items-center space-x-12 ">
+                        <li class="mr-3"><a class="text-zinc-500 font-poppins" href="{{ path('front_default_index') }}">Home</a></li>
+                        <li class="mr-3"><a class="text-zinc-500 font-poppins" href="{{ path('front_app_hotel_index') }}">Hotels</a></li>
+                        <li class="mr-3"><a class="text-zinc-500 font-poppins" href="{{ path('front_app_announce_index') }}">Annonces</a></li>
+                    </ul>
+                </div>
+                <div class="flex justify-center items-center w-2/6">
+                    {% if is_granted('ROLE_ADMIN')%}
+                        <a href="{{ path('admin_default_index') }}">
+                            <button class="mr-3 py-3 px-8 bg-indigo-600 text-white text-sm font-semibold rounded-xl shadow focus:outline-none">Panel Admin</button>
+                        </a>
+                    {% endif %}
+                    {% if is_granted('ROLE_CUSTOMER') and not is_granted('ROLE_ADMIN')%}
+                        <a href="{{ path('customer_default_index') }}">
+                            <button class="mr-3 py-3 px-8 bg-indigo-600 text-white text-sm font-semibold rounded-xl shadow focus:outline-none">Panel Client</button>
+                        </a>
+                    {%  endif %}
+                    {% if app.user %}
+                        <select id="moreChoices" class="focus:outline-none">
+                            <option class="text-zinc-500 font-poppins" value="" selected>Menu</option>
+                            {% if app.user%}
+                                <option value="{{ path('app_profile') }}">Mon profil</option>
+                            {% endif %}
+                            <option value="{{ path('app_logout') }}">Logout</option>
+                        </select>
+                    {% else %}
+                        <a href="{{ path('app_login') }}">
+                            <button class="py-3 px-3 bg-indigo-600 text-white text-sm font-semibold rounded-xl shadow focus:outline-none">Login</button>
+                        </a>
+                    {% endif %}
+                </div>
+            </nav>
+        {% endblock %}
+        <span class="border-zinc-200 border-b-2 h-2 border-solid block"></span>
+        <br>
+            {% include 'partials/_message_flash.html.twig' %}
+        {% block main %}{% endblock %}
+        {% block footer %}{% endblock %}
+        </div>
+    {% endblock %}
+</html>

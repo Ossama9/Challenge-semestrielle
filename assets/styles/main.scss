@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "components/utils";
+@import "components/alert";
+@import "components/pagination";
+@import "components/stars";

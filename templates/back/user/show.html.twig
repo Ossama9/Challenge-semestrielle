@@ -1,0 +1,38 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Liste des users!{% endblock %}
+
+
+{% block main %}
+    <table class="table mb-5">
+        <tbody>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Id</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Prenom</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Email</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">IsActivated</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.isActivated }}</td>
+            </tr>
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Roles</th>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.roles[0] }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn-secondary" href="{{ path('admin_user_index') }}">Retour</a>
+    <a class="btn-danger" href="{{ path('admin_user_remove', { 'id': user.id, 'token': csrf_token('remove' ~ user.id) }) }}">Supprimer</a>
+{% endblock %}

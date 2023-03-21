@@ -1,0 +1,36 @@
+{% extends 'base_customer.html.twig' %}
+
+{% block title %}Commentaire{% endblock %}
+
+{% block main %}
+<h3 class="font-bold text-2xl">Liste des commentaires Par Hotel</h3>
+<table class="table mb-5">
+    <thead class="border-b">
+        <tr>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Hotel</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Message</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Date</th>
+            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for hotel in hotels %}
+        {% for comment in hotel.comments.toArray %}
+        <tr class="border-b">
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ hotel.name }}</td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4">{{ comment.message }}</td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ comment.createdAt | date_modify('+1 hour') | date('Y-m-d H:i:s') }}</td>
+            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap"><button class="btn-danger"><a href="{{ path('customer_app_comment_delete', {'id': comment.id, 'token': csrf_token('remove' ~ comment.id)}) }}">Supprimer</a></button> </td>
+        </tr>
+        {% endfor %}
+
+
+        {% endfor %}
+    </tbody>
+</table>
+<div class="text-center">
+    {{ knp_pagination_render(hotels) }}
+</div>
+
+{% endblock %}

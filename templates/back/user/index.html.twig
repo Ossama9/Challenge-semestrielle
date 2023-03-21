@@ -1,0 +1,58 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Liste des utilisateur{% endblock %}
+
+{% block main %}
+    <h1 class="h1">Liste des utilisateurs</h1>
+    <div class="mt-2">
+        <a class="{{ role == '' ? 'btn-primary' : 'btn-secondary'}}" href="{{ path('admin_user_index') }}">Tout</a>
+        <a class="{{ role == 'admin' ? 'btn-primary' : 'btn-secondary'}}" href="{{ path('admin_user_index', {'role': 'admin'}) }}">Admin</a>
+        <a class="{{ role == 'customer' ? 'btn-primary' : 'btn-secondary'}}" href="{{ path('admin_user_index', {'role': 'customer'}) }}">Customer</a>
+        <a class="{{ role == 'user' ? 'btn-primary' : 'btn-secondary'}}" href="{{ path('admin_user_index', {'role': 'user'}) }}">User</a>
+    </div>
+    <table class="table mb-5">
+        <thead class="border-b">
+            <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Id</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Prenom</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Nom</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Email</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">IsActivated</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Banni</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Role</th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr class="border-b">
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.id }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.firstname }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.lastname }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.email }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.isActivated ? 'oui' : 'non' }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.isBanned ? 'oui': 'non' }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">{{ user.roles[0] }}</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                    <a class="btn-secondary" href="{{ path('admin_user_show', {'id': user.id}) }}">Voir</a>
+                    {% if user.roles[0] != 'ROLE_ADMIN' %}
+                        {% if user.isBanned %}
+                            <a class="btn-secondary" href="{{ path('admin_user_unban', {'id': user.id, 'token': csrf_token('unban' ~ user.id)}) }}">Débannir</a>
+                        {% else %}
+                            <a class="btn-secondary" href="{{ path('admin_user_ban', {'id': user.id, 'token': csrf_token('ban' ~ user.id)}) }}">Bannir</a>
+                        {% endif %}
+                    <a class="btn-danger" href="{{ path('admin_user_remove', {'id': user.id, 'token': csrf_token('remove' ~ user.id)}) }}">Supprimer</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap" colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        {{ knp_pagination_render(users) }}
+    </div>
+{% endblock %}

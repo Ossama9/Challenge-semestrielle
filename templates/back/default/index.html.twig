@@ -1,0 +1,38 @@
+{% extends 'base_back.html.twig' %}
+{% block title %}{{ app_name }} - Dashboard Admin{% endblock %}
+
+{% block main %}
+    <div>
+        <div class="my-3">
+            <form action="" method="get">
+                <div class="search flex items-center space-x-3 h-10">
+                    <span class="material-icons text-gray-500">search</span>
+                    <input class="search-input" type="text" name="search" placeholder="Rechercher">
+                </div>
+            </form>
+        </div>
+        <div class="my-6">
+            <h1 class="h1">Dashboard Admin</h1>
+        </div>
+        <div class="my-10 welcome">
+            <h2 class="h2">Hello {{ user.firstname }} {{ user.lastname}}, Welcome back</h2>
+            <div>dernière connexion: {{ user.lastLogin.format('Y-m-d H:i:s') }}</div>
+        </div>
+        <div class="my-10">
+            <div class="flex w-full border-blue-600">
+                <div class="p-2 w-1/3 bg-white rounded-lg border-red-600">
+                    {{ countWantToBeCustomer }} demandes pour devenir customer
+                    <a class="link block mt-2" href="{{ path('admin_app_request_index') }}">voir</a>
+                </div>
+                <div class="p-2 ml-10 w-1/3 bg-white rounded-lg border-red-600">
+                    {{ countCustomer }} customers
+                    <a class="link block mt-2" href="{{ path('admin_user_index') }}">voir</a>
+                </div>
+                <div class="p-2 ml-10 w-1/3 bg-white rounded-lg border-red-600">
+                    {{ countHotel }} hotels
+                    <a class="link block mt-2" href="{{ path('admin_app_hotel_index') }}">voir</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

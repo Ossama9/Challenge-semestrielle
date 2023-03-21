@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title>Edit Avis</title>
+
+{% block body %}
+    <h1>Edit Avis</h1>
+
+    {{ include('front/comment/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('front_app_comment_index') }}">back to list</a>
+
+    {{ include('front/comment/_delete_form.html.twig') }}
+{% endblock %}
